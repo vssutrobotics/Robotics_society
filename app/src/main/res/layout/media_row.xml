@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="#fff"
+    android:layout_margin="5dp"
+    app:cardElevation="3dp"
+    app:contentPadding="5dp"
+    app:cardCornerRadius="9dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="106dp">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/thumbnail"
+            android:id="@+id/media_img"/>
+        <RelativeLayout
+            android:layout_toRightOf="@+id/media_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="13dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:textSize="17dp"
+                android:text="Project: "
+                android:id="@+id/project"/>
+            <TextView
+                android:layout_toRightOf="@id/project"
+                android:textSize="17dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Project name"
+                android:id="@+id/media_project"/>
+
+
+            <TextView
+                android:layout_below="@+id/project"
+                android:layout_width="wrap_content"
+                android:textSize="17dp"
+                android:layout_height="30dp"
+                android:text="Media:"
+                android:id="@+id/media"/>
+            <TextView
+                android:layout_toRightOf="@+id/media"
+                android:layout_below="@+id/project"
+                android:textSize="17dp"
+                android:paddingLeft="5dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Media channel"
+                android:id="@+id/media_media"/>
+
+
+            <TextView
+                android:layout_below="@+id/media"
+                android:layout_width="wrap_content"
+                android:textSize="13dp"
+                android:layout_height="20dp"
+                android:text="Date:"
+                android:id="@+id/date"/>
+
+            <TextView
+                android:id="@+id/media_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13dp"
+                android:layout_below="@+id/media"
+                android:layout_toRightOf="@+id/date"
+                android:paddingLeft="3dp"
+                android:text="21.01.2019" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

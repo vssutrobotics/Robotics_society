@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "429649683041",
+    "firebase_url": "https://robotics-society-99fe7.firebaseio.com",
+    "project_id": "robotics-society-99fe7",
+    "storage_bucket": "robotics-society-99fe7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:429649683041:android:c9f9caac3653c6c1",
+        "android_client_info": {
+          "package_name": "com.gaurav.robotics_society"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "429649683041-78jdukl5j5cglqp1rntvm325ta198jdl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gaurav.robotics_society",
+            "certificate_hash": "65e73a66a95937532fd71371ddd9fbe8ec14d287"
+          }
+        },
+        {
+          "client_id": "429649683041-8rnq0crctptcvhe6qpm910inuq0jidk1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6D5UqI6ISxek_vEkuA5gC-A_EU7MJSAo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "429649683041-8rnq0crctptcvhe6qpm910inuq0jidk1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

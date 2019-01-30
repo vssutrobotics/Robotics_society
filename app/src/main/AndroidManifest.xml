@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.gaurav.robotics_society">
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:name=".Application"
+        android:allowBackup="true"
+        android:icon="@drawable/rslogo"
+        android:label="Robotics Society"
+        android:roundIcon="@drawable/rslogo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".HomeActivity"/>
+        <activity android:name=".Home_Page"/>
+        <activity android:name=".events"
+            android:parentActivityName=".Home_Page"/>
+        <activity android:name=".awards"
+            android:parentActivityName=".Home_Page"/>
+        <activity android:name=".Media"
+            android:parentActivityName=".Home_Page"/>
+    </application>
+
+</manifest>

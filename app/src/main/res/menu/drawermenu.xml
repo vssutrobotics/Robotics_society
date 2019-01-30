@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_achievements"
+            android:title="Achievements"
+            android:icon="@drawable/ic_menu_manage"/>
+
+        <item android:id="@+id/nav_noti"
+            android:title="Notification"
+            android:icon="@drawable/ic_menu_send"/>
+
+        <item android:id="@+id/nav_projects"
+            android:title="Projects"
+            android:icon="@drawable/ic_menu_gallery"/>
+
+        <item android:id="@+id/nav_awards"
+            android:title="Awards"
+            android:icon="@drawable/ic_menu_share"/>
+
+        <item android:id="@+id/nav_media"
+            android:title="Media Coverage"
+            android:icon="@drawable/ic_menu_camera"/>
+
+        <item android:id="@+id/nav_quiz"
+            android:title="Quiz"
+            android:icon="@drawable/ic_quiz"/>
+
+        <item android:id="@+id/nav_logout"
+            android:title="Logout"
+            android:icon="@drawable/ic_menu_camera"/>
+    </group>
+
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:title="Support"
+                android:icon="@drawable/ic_menu_send"
+                android:id="@+id/nav_support"/>
+            <item
+                android:title="About Us"
+                android:icon="@drawable/ic_menu_camera"
+                android:id="@+id/nav_aboutus"/>
+        </menu>
+    </item>
+
+</menu>

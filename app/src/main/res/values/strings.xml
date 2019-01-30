@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Robotics_society</string>
+    <string name="Open">Open</string>
+    <string name="Close">Close</string>
+
+
+
+
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+
+
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">Start Now</string>
+
+    <string name="slide_1_title">Just Here!</string>
+    <string name="slide_1_desc">The easiest way to keep in touch with Robotics Society!</string>
+
+    <string name="slide_2_title">LOTS OF ENERGY</string>
+    <string name="slide_2_desc">WHERE IMAGINATION MEETS INNOVATION!</string>
+
+    <string name="slide_3_title">Group Discussion</string>
+    <string name="slide_3_desc">IDEATE CREATE INNOVATE</string>
+
+    <string name="home_title">Welcome to Application</string>
+    <string name="home_desc">make friends and have fun.</string>
+</resources>
