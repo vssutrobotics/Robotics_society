@@ -1,11 +1,13 @@
 package com.gaurav.robotics_society;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 import com.gaurav.robotics_society.Adapters.Achive;
 import com.gaurav.robotics_society.Models.Achivements_Model;
+import com.gaurav.robotics_society.app_update_checker.UpdateHelper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,8 +33,9 @@ import java.util.List;
  * Created by GAURAV on 09-01-2019.
  */
 
-public class Home_Page extends AppCompatActivity {
+public class Home_Page extends AppCompatActivity implements UpdateHelper.onUpdateCheckListener {
 
+    List<Achivements_Model> productList = new ArrayList<Achivements_Model>();
     private Toolbar toolbar;
     private NavigationView navigationView;
     private DrawerLayout drw;
@@ -39,8 +43,6 @@ public class Home_Page extends AppCompatActivity {
     private ProgressBar pb;
     private RecyclerView recycler;
     private Achive adapter;
-    List<Achivements_Model> productList = new ArrayList<Achivements_Model>();
-
     private DatabaseReference dbProducts;
 
     @Override
@@ -48,6 +50,10 @@ public class Home_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.achivements);
         this.setTitle("Achievements");
+
+        UpdateHelper.with(this)
+                .onUpdateCheck(this)
+                .check();
 
 
         //toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -186,5 +192,24 @@ public class Home_Page extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onUpdateCheckListener(final String urlApp) {
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setTitle("New Version of Society is Available")
+                .setMessage("Please Update to continue")
+                .setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(Home_Page.this, "Updating!!!" + urlApp, Toast.LENGTH_SHORT).show();
+                    }
+                }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).create();
+        alertDialog.show();
     }
 }
