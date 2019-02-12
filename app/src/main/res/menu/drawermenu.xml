@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_quiz"
+            android:title="Profile" />
+
         <item android:id="@+id/nav_achievements"
             android:title="Achievements"
             android:icon="@drawable/ic_menu_manage"/>
@@ -17,10 +23,6 @@
         <item android:id="@+id/nav_awards"
             android:title="Awards"
             android:icon="@drawable/ic_menu_share"/>
-
-        <item android:id="@+id/nav_media"
-            android:title="Media Coverage"
-            android:icon="@drawable/ic_menu_camera"/>
 
         <item android:id="@+id/nav_quiz"
             android:title="Quiz"

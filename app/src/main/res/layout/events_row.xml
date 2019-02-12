@@ -1,50 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="#fff"
     android:layout_margin="5dp"
+    app:cardBackgroundColor="#fff"
+    app:cardCornerRadius="9dp"
     app:cardElevation="3dp"
-    app:contentPadding="5dp"
-    app:cardCornerRadius="9dp">
+    app:contentPadding="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/events_info"
-                android:layout_weight="3"
-                android:layout_height="match_parent"
-                android:layout_width="0dp"
-                android:textSize="15dp"
-                android:textAlignment="center"
-                android:gravity="center_vertical"
-                android:text="Info about the event"/>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#dadada"/>
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/events_date"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:textSize="15dp"
-                android:textAlignment="center"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="Date" />
+                android:id="@+id/events_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="Default title:"
+                android:textColor="#000000"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/events_body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="this is default body for notification"
+                android:textColor="#000000"
+                android:textSize="15dp" />
         </LinearLayout>
     </RelativeLayout>
 

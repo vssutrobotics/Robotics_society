@@ -4,21 +4,16 @@
     <color name="colorPrimaryDark">#072E63</color>
     <color name="colorAccent">#01579B</color>
 
-
-
-    <color name="bg_screen1">#f64c74</color>
-    <color name="bg_screen2">#20d2cc</color>
-    <color name="bg_screen3">#4495ff</color>
-
     <!-- dots inactive colors -->
-    <color name="pager_dark_screen1">#d1395c</color>
-    <color name="pager_dark_screen2">#14a895</color>
-    <color name="pager_dark_screen3">#3378d4</color>
+    <color name="pager_dark_screen1">#5375a3</color>
+    <color name="pager_dark_screen2">#7f22c9</color>
+    <color name="pager_dark_screen3">#484747</color>
 
     <!-- dots active colors -->
-    <color name="pager_light_screen1">#f98da5</color>
-    <color name="pager_light_screen2">#8cf9eb</color>
-    <color name="pager_light_screen3">#93c6fd</color>
+    <color name="pager_light_screen1">#709ed2</color>
+    <color name="pager_light_screen2">#d7b2f3</color>
+    <color name="pager_light_screen3">#878787</color>
+
 
     <array name="array_pager_active">
         <item>@color/pager_light_screen1</item>

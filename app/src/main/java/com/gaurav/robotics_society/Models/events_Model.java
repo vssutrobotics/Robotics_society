@@ -5,29 +5,39 @@ package com.gaurav.robotics_society.Models;
  */
 
 public class events_Model {
-    String posts;
-    String date;
+    private String title;
+    private String body;
+    private String url;
 
-    public events_Model(String posts, String date) {
-        this.posts = posts;
-        this.date = date;
+    public events_Model(String title, String body, String url) {
+        this.title = title;
+        this.body = body;
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
     public events_Model(){
     }
 
-    public String getPosts() {
-        return posts;
+    public String getTitle() {
+        return title;
     }
 
-    public void setPosts(String posts) {
-        this.posts = posts;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getDate() {
-        return date;
+    public String getBody() {
+        return body;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setBody(String body) {
+        this.body = body;
     }
 }

@@ -1,5 +1,6 @@
 package com.gaurav.robotics_society;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,11 +27,17 @@ public class events extends AppCompatActivity {
     private List<events_Model> products = new ArrayList<events_Model>();
     private DatabaseReference dbbproducts;
 
+    private ProgressDialog pd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.events);
-        this.setTitle("Events");
+        pd = new ProgressDialog(this);
+        pd.setMessage("Please wait!");
+        pd.show();
+
+        this.setTitle("Notification");
 
         recycler = (RecyclerView) findViewById(R.id.events_recyclerView);
         recycler.setHasFixedSize(true);
@@ -44,14 +51,20 @@ public class events extends AppCompatActivity {
                 for (DataSnapshot productSnapshot : dataSnapshot.getChildren()){
                     events_Model p = productSnapshot.getValue(events_Model.class);
                     events_Model ach = new events_Model();
-                    String date = p.getDate();
-                    String posts = p.getPosts();
-                    ach.setDate(date);
-                    ach.setPosts(posts);
+
+                    String body = p.getBody();
+                    String title = p.getTitle();
+                    String url = p.getUrl();
+
+                    ach.setBody(body);
+                    ach.setTitle(title);
+                    ach.setUrl(url);
+
                     products.add(ach);
                 }
 
                 events = new events_adp(events.this, products);
+                pd.hide();
                 recycler.setAdapter(events);
 
             }
@@ -61,6 +74,23 @@ public class events extends AppCompatActivity {
 
             }
         });
+    }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        pd.show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        pd.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        pd.hide();
     }
 }

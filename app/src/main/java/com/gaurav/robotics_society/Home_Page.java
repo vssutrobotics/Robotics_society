@@ -2,7 +2,9 @@ package com.gaurav.robotics_society;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -15,11 +17,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gaurav.robotics_society.Adapters.Achive;
 import com.gaurav.robotics_society.Models.Achivements_Model;
 import com.gaurav.robotics_society.app_update_checker.UpdateHelper;
+import com.gaurav.robotics_society.user.profile;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,12 +50,30 @@ public class Home_Page extends AppCompatActivity implements UpdateHelper.onUpdat
     private Achive adapter;
     private DatabaseReference dbProducts;
 
+    private NavigationView mNav;
+    private View mHeader;
+    private String user_id = null;
+    private String email = null;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.achivements);
         this.setTitle("Achievements");
 
+        SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        String email = (mSharedPreference.getString("user_email", "email"));
+        //String user_id = (mSharedPreference.getString("user_id", "id"));
+        mSharedPreference.edit().putBoolean("signIn", true).commit();
+
+        mNav = (NavigationView) findViewById(R.id.navigation_View);
+        mHeader = mNav.getHeaderView(0);
+        TextView details = (TextView) mHeader.findViewById(R.id.user_details);
+
+        if (email != null) {
+            details.setText(String.valueOf(email));
+        }
         UpdateHelper.with(this)
                 .onUpdateCheck(this)
                 .check();
@@ -62,66 +85,89 @@ public class Home_Page extends AppCompatActivity implements UpdateHelper.onUpdat
         drw = (DrawerLayout) findViewById(R.id.drawer_layout);
         mtoggle = new ActionBarDrawerToggle(this, drw, R.string.Open, R.string.Close);
         drw.addDrawerListener(mtoggle);
+
         mtoggle.syncState();
         navigationView = (NavigationView) findViewById(R.id.navigation_View);
-        navigationView.getMenu().getItem(0).setChecked(true);
+        navigationView.getMenu().getItem(1).setChecked(true);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         switch(menuItem.getItemId()){
+                            case R.id.nav_profile:
+                                Intent prof = new Intent(Home_Page.this, profile.class);
+                                startActivity(prof);
+                                break;
+
+
                             case R.id.nav_achievements:
                                 Toast.makeText(Home_Page.this, "These are the Achievements of Society", Toast.LENGTH_LONG).show();
                                 drw.closeDrawers();
                                 break;
+
+
                             case R.id.nav_noti:
-                                Toast.makeText(Home_Page.this, "Notification", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Home_Page.this, "Notification", Toast.LENGTH_SHORT).show();
                                 Intent eve = new Intent(getBaseContext(), events.class);
                                 startActivity(eve);
                                 break;
+
+
                             case R.id.nav_projects:
-                                Toast.makeText(Home_Page.this, "Projects", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Home_Page.this, "Projects", Toast.LENGTH_SHORT).show();
+                                Intent projects = new Intent(getBaseContext(), com.gaurav.robotics_society.projects.class);
+                                startActivity(projects);
                                 break;
                             case R.id.nav_awards:
-                                Toast.makeText(Home_Page.this, "Awards", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Home_Page.this, "Awards", Toast.LENGTH_SHORT).show();
                                 Intent awards = new Intent(getBaseContext(), awards.class);
                                 startActivity(awards);
                                 break;
-                            case R.id.nav_media:
-                                Toast.makeText(Home_Page.this, "Media", Toast.LENGTH_SHORT).show();
-                                Intent media = new Intent(getBaseContext(), Media.class);
-                                startActivity(media);
-                                break;
+
+
                             case R.id.nav_quiz:
-                                Toast.makeText(Home_Page.this, "Quizzes", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Home_Page.this, "This feature is under Development", Toast.LENGTH_SHORT).show();
                                 break;
+
+
                             case R.id.nav_logout:
-                                Toast.makeText(Home_Page.this, "Logout", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Home_Page.this, "Signing Out", Toast.LENGTH_SHORT).show();
+                                PreferenceManager.getDefaultSharedPreferences(Home_Page.this).edit().putBoolean("signIn", false).commit();
+                                PreferenceManager.getDefaultSharedPreferences(Home_Page.this).edit().putString("user_email", "email").commit();
+                                PreferenceManager.getDefaultSharedPreferences(Home_Page.this).edit().putString("user_id", "id").commit();
+
+                                finish();
+                                FirebaseAuth.getInstance().signOut();
+                                startActivity(new Intent(Home_Page.this, HomeActivity.class));
                                 break;
+
+
                             case R.id.nav_support:
-                                Toast.makeText(Home_Page.this, "Feedback", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Home_Page.this, "Support", Toast.LENGTH_SHORT).show();
                                 break;
+
+
                             case R.id.nav_aboutus:
-                                Toast.makeText(Home_Page.this, "AboutUs", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Home_Page.this, "AboutUs", Toast.LENGTH_SHORT).show();
+                                Intent abt = new Intent(getBaseContext(), about.class);
+                                startActivity(abt);
                                 break;
+
+
                             default:
                                 Toast.makeText(Home_Page.this, "Default", Toast.LENGTH_SHORT).show();
                                 return false;
                         }
+
+
                         return true;
                     }
                 }
         );
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-
-
         pb = (ProgressBar) findViewById(R.id.ProgressBB);
         pb.setVisibility(View.VISIBLE);
-
-        //setSupportActionBar(toolbar);
 
         recycler = (RecyclerView) findViewById(R.id.recyclerView);
         recycler.setHasFixedSize(true);
@@ -137,12 +183,16 @@ public class Home_Page extends AppCompatActivity implements UpdateHelper.onUpdat
                     for (DataSnapshot productSnapshot : dataSnapshot.getChildren()){
                         Achivements_Model p = productSnapshot.getValue(Achivements_Model.class);
                         Achivements_Model ach = new Achivements_Model();
+
                         String desc = p.getDesc();
                         String image = p.getImage();
                         String title = p.getTitle();
+                        String url = p.getUrl();
+
                         ach.setDesc(desc);
                         ach.setImage(image);
                         ach.setTitle(title);
+                        ach.setUrl(url);
                         productList.add(ach);
                     }
 
@@ -197,19 +247,16 @@ public class Home_Page extends AppCompatActivity implements UpdateHelper.onUpdat
     @Override
     public void onUpdateCheckListener(final String urlApp) {
         AlertDialog alertDialog = new AlertDialog.Builder(this)
-                .setTitle("New Version of Society is Available")
+                .setCancelable(false)
+                .setTitle("Newer Version is Available")
                 .setMessage("Please Update to continue")
                 .setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Toast.makeText(Home_Page.this, "Updating!!!" + urlApp, Toast.LENGTH_SHORT).show();
                     }
-                }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
                 }).create();
+        alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
     }
 }

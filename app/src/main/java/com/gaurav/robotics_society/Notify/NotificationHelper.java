@@ -45,8 +45,6 @@ public class NotificationHelper extends ContextWrapper {
     @TargetApi(Build.VERSION_CODES.O)
     public Notification.Builder getNotification2() {
         return new Notification.Builder(getApplicationContext(), SECONDARY_CHANNEL)
-                .setContentTitle("Newer Version is Available")
-                .setContentText("Please Update to continue")
                 .setSmallIcon(getSmallIcon())
                 .setAutoCancel(true);
     }
@@ -67,7 +65,7 @@ public class NotificationHelper extends ContextWrapper {
      * @return The small icon resource id
      */
     private int getSmallIcon() {
-        return R.drawable.rslogo;
+        return R.drawable.ic_stat_name;
     }
 
     /**
