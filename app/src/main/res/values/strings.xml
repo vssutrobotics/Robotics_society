@@ -33,4 +33,5 @@
     <string name="home_title">Welcome to Application</string>
     <string name="home_desc">make friends and have fun.</string>
     <string name="asset_statements" translatable="false">[{ \"include\": \"https://www.vssutrobotics.in/.well-known/assetlinks.json\" }]</string>
+    <string name="about_society">Robotics Society is an official society of VSSUT, Burla which owes its initiative to alumni Mr. Biswajit Parida. The society encourages various technical activities and projects in the field of amateur as well as advanced Robotics, in the university.The members are a bunch of budding technocrats who are driven by an acute zest for learning technological advancements and happenings in the modern world, and endeavor in applying the theoretical learnings into realistic projects.</string>
 </resources>
