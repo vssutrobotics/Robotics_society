@@ -43,6 +43,7 @@ public class Achive extends RecyclerView.Adapter<Achive.viewholder> {
         holder.textTitle.setText(product.getTitle());
         holder.textDesc.setText(product.getDesc());
         Picasso.get().load(product.getImage()).into(holder.imageView);
+        holder.imageView.setBackgroundResource(android.R.color.transparent);
 
         holder.setItemClickListener(new Achie_Click_listener() {
             @Override

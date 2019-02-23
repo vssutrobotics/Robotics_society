@@ -1,5 +1,6 @@
 package com.gaurav.robotics_society;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -18,18 +19,28 @@ public class awards extends AppCompatActivity {
         this.setTitle("Awards");
     }
 
-    public void awards_2019(View view) {
+    public void ROBOCON(View view) {
+        Intent rob = new Intent(awards.this, robocon.class);
+        startActivity(rob);
+
     }
 
-    public void awards_2018(View view) {
+    public void NATIONALS(View view) {
+        Intent nat = new Intent(awards.this, nationals.class);
+        startActivity(nat);
+
     }
 
-    public void awards_2017(View view) {
+    public void E_YANTRA(View view) {
+        Intent eyantra = new Intent(awards.this, eyantra.class);
+        startActivity(eyantra);
+
     }
 
-    public void awards_2016(View view) {
+    public void TECHFESTS(View view) {
+        Intent tech = new Intent(awards.this, techfest.class);
+        startActivity(tech);
+
     }
 
-    public void awards_2015(View view) {
-    }
 }

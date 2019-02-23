@@ -8,7 +8,7 @@
 
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in">Signin or Register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -32,4 +32,5 @@
 
     <string name="home_title">Welcome to Application</string>
     <string name="home_desc">make friends and have fun.</string>
+    <string name="asset_statements" translatable="false">[{ \"include\": \"https://www.vssutrobotics.in/.well-known/assetlinks.json\" }]</string>
 </resources>

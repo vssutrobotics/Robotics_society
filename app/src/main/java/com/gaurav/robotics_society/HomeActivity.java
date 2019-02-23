@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -155,6 +156,10 @@ public class HomeActivity extends AppCompatActivity implements UpdateHelper.onUp
             }
         });
 
+        // ATTENTION: This was auto-generated to handle app links.
+        Intent appLinkIntent = getIntent();
+        String appLinkAction = appLinkIntent.getAction();
+        Uri appLinkData = appLinkIntent.getData();
     }
 
     private void signin_user() {
@@ -266,8 +271,18 @@ public class HomeActivity extends AppCompatActivity implements UpdateHelper.onUp
                                 //Toast.makeText(HomeActivity.this, "User Created, Now you can SignIn", Toast.LENGTH_SHORT).show();
                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                 Firebase mfire = new Firebase("https://robotics-society-99fe7.firebaseio.com/Users/" + user.getUid());
+
+                                Firebase name = mfire.child("name");
+                                name.setValue("Default");
+
                                 Firebase role = mfire.child("email");
                                 role.setValue(email);
+
+                                Firebase user_role = mfire.child("role");
+                                user_role.setValue("Student");
+
+                                Firebase rol = mfire.child("roll");
+                                rol.setValue("none");
 
                                 String device_token = PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getString("user_token", "email");
                                 Firebase token = mfire.child("token");
@@ -315,7 +330,13 @@ public class HomeActivity extends AppCompatActivity implements UpdateHelper.onUp
                 .setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(HomeActivity.this, "Updating!!!" + urlApp, Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(HomeActivity.this, "Updating!!!" + urlApp, Toast.LENGTH_SHORT).show();
+
+                        Intent i1 = new Intent(android.content.Intent.ACTION_VIEW);
+                        i1.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.gaurav.robotics_society"));
+                        finish();
+                        startActivity(i1);
+
                     }
                 }).create();
         alertDialog.setCanceledOnTouchOutside(false);
@@ -334,7 +355,9 @@ public class HomeActivity extends AppCompatActivity implements UpdateHelper.onUp
                             .setContentTitle("A Update is available")
                             .setContentText("Please visit PlayStore to Update");
 
-            Intent notificationIntent = new Intent(this, MainActivity.class);
+            Intent notificationIntent = new Intent(android.content.Intent.ACTION_VIEW);
+            notificationIntent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.gaurav.robotics_society"));
+
             PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,
                     PendingIntent.FLAG_UPDATE_CURRENT);
             builder.setContentIntent(contentIntent);

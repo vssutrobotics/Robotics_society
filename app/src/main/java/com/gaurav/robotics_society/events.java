@@ -22,6 +22,7 @@ import java.util.List;
  */
 
 public class events extends AppCompatActivity {
+
     private RecyclerView recycler;
     private events_adp events;
     private List<events_Model> products = new ArrayList<events_Model>();
@@ -85,7 +86,7 @@ public class events extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        pd.show();
+        pd.hide();
     }
 
     @Override

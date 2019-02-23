@@ -5,7 +5,7 @@
 
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_quiz"
+            android:icon="@drawable/ic_profile"
             android:title="Profile" />
 
         <item android:id="@+id/nav_achievements"
@@ -14,7 +14,7 @@
 
         <item android:id="@+id/nav_noti"
             android:title="Notification"
-            android:icon="@drawable/ic_menu_send"/>
+            android:icon="@drawable/ic_notification" />
 
         <item android:id="@+id/nav_projects"
             android:title="Projects"
@@ -30,7 +30,7 @@
 
         <item android:id="@+id/nav_logout"
             android:title="Logout"
-            android:icon="@drawable/ic_menu_camera"/>
+            android:icon="@drawable/ic_logout" />
     </group>
 
 

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gaurav.robotics_society">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -12,13 +13,36 @@
         android:roundIcon="@drawable/rslogo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <meta-data
+            android:name="asset_statements"
+            android:resource="@string/asset_statements" />
+
+        <!--<activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>-->
+
+        <activity android:name=".HomeActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.vssutrobotics.in"
+                    android:pathPattern="/robotics_society_app"
+                    android:scheme="https" />
+            </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity"/>
 
         <activity android:name=".user.forget" />
 
@@ -26,21 +50,44 @@
             android:name=".user.profile"
             android:parentActivityName=".Home_Page" />
 
-        <activity android:name=".Home_Page"/>
+        <activity android:name=".Home_Page" />
 
-        <activity android:name=".events"
-            android:parentActivityName=".Home_Page"/>
+        <activity
+            android:name=".events"
+            android:parentActivityName=".Home_Page" />
 
-        <activity android:name=".awards"
-            android:parentActivityName=".Home_Page"/>
+        <activity
+            android:name=".awards"
+            android:parentActivityName=".Home_Page" />
 
         <activity
             android:name=".about"
-            android:parentActivityName=".Home_Page"/>
+            android:parentActivityName=".Home_Page" />
 
         <activity
             android:name=".projects"
             android:parentActivityName=".Home_Page" />
+
+        <activity
+            android:name=".support"
+            android:parentActivityName=".Home_Page" />
+
+        <activity
+            android:name=".robocon"
+            android:parentActivityName=".awards" />
+
+        <activity
+            android:name=".nationals"
+            android:parentActivityName=".awards" />
+
+        <activity
+            android:name=".eyantra"
+            android:parentActivityName=".awards" />
+
+        <activity
+            android:name=".techfest"
+            android:parentActivityName=".awards" />
+
 
         <service android:name=".Notify.MessagingService">
             <intent-filter>

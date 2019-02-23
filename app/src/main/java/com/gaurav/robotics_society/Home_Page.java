@@ -3,6 +3,7 @@ package com.gaurav.robotics_society;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -143,7 +144,9 @@ public class Home_Page extends AppCompatActivity implements UpdateHelper.onUpdat
 
 
                             case R.id.nav_support:
-                                Toast.makeText(Home_Page.this, "Support", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Home_Page.this, "Support", Toast.LENGTH_SHORT).show();
+                                Intent sup = new Intent(Home_Page.this, support.class);
+                                startActivity(sup);
                                 break;
 
 
@@ -253,10 +256,20 @@ public class Home_Page extends AppCompatActivity implements UpdateHelper.onUpdat
                 .setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(Home_Page.this, "Updating!!!" + urlApp, Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(Home_Page.this, "Updating!!!" + urlApp, Toast.LENGTH_SHORT).show();
+                        Intent i1 = new Intent(android.content.Intent.ACTION_VIEW);
+                        i1.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.gaurav.robotics_society"));
+                        finish();
+                        startActivity(i1);
                     }
                 }).create();
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        drw.closeDrawers();
     }
 }
