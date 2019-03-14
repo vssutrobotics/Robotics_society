@@ -57,6 +57,7 @@ public class HomeActivity extends AppCompatActivity implements UpdateHelper.onUp
     private Snackbar snackbar, snackbar1, snackbar2;
     private boolean internetConnected = true;
 
+    public AlertDialog alertDialog_not_connected;
 
     private static final int NOTI_SECONDARY1 = 1201;
     private TextView btn1;
@@ -110,6 +111,10 @@ public class HomeActivity extends AppCompatActivity implements UpdateHelper.onUp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        /*if(isNetworkAvailable()){
+            network_alert();
+        }*/
+
         if (PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getBoolean("signIn", false)) {
             finish();
             Intent inte = new Intent(HomeActivity.this, Home_Page.class);
@@ -125,6 +130,7 @@ public class HomeActivity extends AppCompatActivity implements UpdateHelper.onUp
         email_UI = (EditText) findViewById(R.id.email);
         pass_UI = (EditText) findViewById(R.id.password);
         Signin_button = (Button) findViewById(R.id.email_sign_in_button);
+        btn1 = (TextView) findViewById(R.id.Button1);
         signin_pb = (ProgressBar) findViewById(R.id.progress_barr_signin);
         signin_pb.setVisibility(View.GONE);
         sigin_layout = (LinearLayout) findViewById(R.id.email_login_form);
@@ -140,6 +146,12 @@ public class HomeActivity extends AppCompatActivity implements UpdateHelper.onUp
                 Forget_pass.setVisibility(View.GONE);
                 signin_pb.setVisibility(View.VISIBLE);
                 signin_user();
+                /*if(!isNetworkAvailable()) {
+                    signin_user();
+                }
+                else {
+
+                }*/
             }
         });
 
@@ -147,7 +159,6 @@ public class HomeActivity extends AppCompatActivity implements UpdateHelper.onUp
                 .onUpdateCheck(this)
                 .check();
 
-        btn1 = (TextView) findViewById(R.id.Button1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,6 +171,16 @@ public class HomeActivity extends AppCompatActivity implements UpdateHelper.onUp
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();
+        if ((activeNetworkInfo != null) && (activeNetworkInfo.isConnectedOrConnecting())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void signin_user() {
@@ -348,6 +369,14 @@ public class HomeActivity extends AppCompatActivity implements UpdateHelper.onUp
             nb.setContentText("Please visit PlayStore to Update");
             nb.setContentTitle("A Update is available");
             noti.notify(NOTI_SECONDARY1, nb);
+
+            Intent notificationIntent = new Intent(android.content.Intent.ACTION_VIEW);
+            notificationIntent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.gaurav.robotics_society"));
+
+            PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+            nb.setContentIntent(contentIntent);
+
         } else {
             NotificationCompat.Builder builder =
                     new NotificationCompat.Builder(this)
@@ -396,13 +425,13 @@ public class HomeActivity extends AppCompatActivity implements UpdateHelper.onUp
             internetStatus = "No Internet Connection";
             Signin_button.setClickable(false);
         }
+
         if (internetStatus.equalsIgnoreCase("No Internet Connection")) {
             snackbar = Snackbar
                     .make(rootl, internetStatus, Snackbar.LENGTH_LONG)
                     .setAction("Retry", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            snackbar.dismiss();
                         }
                     });
         } else {
@@ -415,12 +444,12 @@ public class HomeActivity extends AppCompatActivity implements UpdateHelper.onUp
                         }
                     });
         }
-        // Changing message text color
+
         snackbar.setActionTextColor(Color.WHITE);
-        // Changing action button text color
         View sbView = snackbar.getView();
         TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(Color.WHITE);
+
         if (internetStatus.equalsIgnoreCase("No Internet Connection")) {
             if (internetConnected) {
                 snackbar.show();
