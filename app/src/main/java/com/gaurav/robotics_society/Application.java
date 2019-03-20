@@ -2,6 +2,7 @@ package com.gaurav.robotics_society;
 
 import android.support.annotation.NonNull;
 
+import com.crashlytics.android.Crashlytics;
 import com.gaurav.robotics_society.app_update_checker.UpdateHelper;
 import com.gaurav.robotics_society.utils.Prefs;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -10,6 +11,8 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by GAURAV on 22-01-2019.
@@ -27,6 +30,7 @@ public class Application extends android.app.Application{
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
 
         app = this;
         prefs = new Prefs(this);

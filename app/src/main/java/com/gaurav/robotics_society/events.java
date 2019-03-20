@@ -65,8 +65,8 @@ public class events extends AppCompatActivity {
                 }
 
                 events = new events_adp(events.this, products);
-                pd.hide();
                 recycler.setAdapter(events);
+                pd.hide();
 
             }
 
