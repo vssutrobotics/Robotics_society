@@ -41,6 +41,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.ProviderQueryResult;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 /**
@@ -117,6 +123,9 @@ public class HomeActivity extends AppCompatActivity implements UpdateHelper.onUp
 
         if (PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getBoolean("signIn", false)) {
             finish();
+            Firebase.setAndroidContext(this);
+            send_token_to_server();
+            send_time_to_server();
             Intent inte = new Intent(HomeActivity.this, Home_Page.class);
             startActivity(inte);
         }
@@ -171,6 +180,38 @@ public class HomeActivity extends AppCompatActivity implements UpdateHelper.onUp
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
+    }
+
+    private void send_time_to_server() {
+        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+        String date = df.format(Calendar.getInstance().getTime());
+        String user_id = (PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getString("user_id", "id"));
+        Firebase mfire = new Firebase("https://robotics-society-99fe7.firebaseio.com/Users/" + user_id);
+
+        Firebase Fullname = mfire.child("last_login");
+        Fullname.setValue(date);
+    }
+
+    private void send_token_to_server() {
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            return;
+                        }
+                        // Get new Instance ID token
+                        String user_id = (PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getString("user_id", "id"));
+                        String token = task.getResult().getToken();
+                        //SharedPreferences mSharedPreference= PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                        //mSharedPreference.edit().putString("user_token", token).commit();
+                        Firebase mfire = new Firebase("https://robotics-society-99fe7.firebaseio.com/Users/" + user_id);
+
+                        Firebase Fullname = mfire.child("token");
+                        Fullname.setValue(token);
+                    }
+                });
+        // [END retrieve_current_token]
     }
 
     private boolean isNetworkAvailable() {
@@ -305,9 +346,8 @@ public class HomeActivity extends AppCompatActivity implements UpdateHelper.onUp
                                 Firebase rol = mfire.child("roll");
                                 rol.setValue("none");
 
-                                String device_token = PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getString("user_token", "email");
                                 Firebase token = mfire.child("token");
-                                token.setValue(device_token);
+                                token.setValue(FirebaseInstanceId.getInstance().getInstanceId().getResult().getToken());
 
                                 user.sendEmailVerification()
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {

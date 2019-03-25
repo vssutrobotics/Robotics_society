@@ -1,8 +1,10 @@
 package com.gaurav.robotics_society;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -21,18 +23,26 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
 import com.gaurav.robotics_society.Adapters.Achive;
 import com.gaurav.robotics_society.Models.Achivements_Model;
 import com.gaurav.robotics_society.app_update_checker.UpdateHelper;
 import com.gaurav.robotics_society.user.profile;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -62,6 +72,7 @@ public class Home_Page extends AppCompatActivity implements UpdateHelper.onUpdat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.achivements);
         this.setTitle("Achievements");
+        Firebase.setAndroidContext(this);
 
         SharedPreferences mSharedPreference = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         String email = (mSharedPreference.getString("user_email", "email"));
@@ -78,7 +89,8 @@ public class Home_Page extends AppCompatActivity implements UpdateHelper.onUpdat
         UpdateHelper.with(this)
                 .onUpdateCheck(this)
                 .check();
-
+        send_time_to_server();
+        send_token_to_server();
 
         //toolbar = (Toolbar) findViewById(R.id.toolbar);
         //toolbar.setTitle("Society");
@@ -271,5 +283,51 @@ public class Home_Page extends AppCompatActivity implements UpdateHelper.onUpdat
     protected void onRestart() {
         super.onRestart();
         drw.closeDrawers();
+    }
+
+    private void send_time_to_server() {
+        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+        String date = df.format(Calendar.getInstance().getTime());
+        String user_id = (PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getString("user_id", "id"));
+
+        Firebase mfire = new Firebase("https://robotics-society-99fe7.firebaseio.com/Users/" + user_id);
+        Firebase Fullname = mfire.child("last_login");
+        Fullname.setValue(date);
+
+        Firebase version = mfire.child("version");
+        version.setValue(getAppVersion(this));
+    }
+
+    private void send_token_to_server() {
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            return;
+                        }
+                        // Get new Instance ID token
+                        String user_id = (PreferenceManager.getDefaultSharedPreferences(getBaseContext()).getString("user_id", "id"));
+                        String token = task.getResult().getToken();
+                        Firebase mfire = new Firebase("https://robotics-society-99fe7.firebaseio.com/Users/" + user_id);
+
+                        Firebase Fullname = mfire.child("token");
+                        Fullname.setValue(token);
+                    }
+                });
+        // [END retrieve_current_token]
+    }
+
+    private String getAppVersion(Context context) {
+        String result = "";
+        try {
+            result = context.getPackageManager().getPackageInfo(context.getPackageName(), 0)
+                    .versionName;
+            result = result.replaceAll("[a-zA-Z]|-", "");
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 }

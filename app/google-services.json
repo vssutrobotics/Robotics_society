@@ -23,6 +23,22 @@
           }
         },
         {
+          "client_id": "429649683041-kot6t6oef6l0ek4j5m9u5a2aq2buadvp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gaurav.robotics_society",
+            "certificate_hash": "ca4442b6f7dce47d720159cef765c72b322a2f9f"
+          }
+        },
+        {
+          "client_id": "429649683041-peqe9oairpvoo9ocuvjcdlrkibtt0uv8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gaurav.robotics_society",
+            "certificate_hash": "ea691c9b5999e7f962a64b1ef0d423bc7f1ec7e7"
+          }
+        },
+        {
           "client_id": "429649683041-8rnq0crctptcvhe6qpm910inuq0jidk1.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -40,7 +56,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "429649683041-8rnq0crctptcvhe6qpm910inuq0jidk1.apps.googleusercontent.com",
+              "client_id": "429649683041-n9sa5ktkr6ojrcb1akppc3ftbb4d1195.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
