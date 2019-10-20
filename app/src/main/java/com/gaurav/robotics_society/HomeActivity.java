@@ -346,9 +346,6 @@ public class HomeActivity extends AppCompatActivity implements UpdateHelper.onUp
                                 Firebase rol = mfire.child("roll");
                                 rol.setValue("none");
 
-                                Firebase token = mfire.child("token");
-                                token.setValue(FirebaseInstanceId.getInstance().getInstanceId().getResult().getToken());
-
                                 user.sendEmailVerification()
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
@@ -361,6 +358,11 @@ public class HomeActivity extends AppCompatActivity implements UpdateHelper.onUp
                                                     snackbar2 = Snackbar
                                                             .make(rootl, "Email verification sent, Please Verify to SignIn", Snackbar.LENGTH_LONG).setActionTextColor(Color.WHITE);
                                                     snackbar2.show();
+
+                                                    /*FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                                    Firebase mfire = new Firebase("https://robotics-society-99fe7.firebaseio.com/Users/" + user.getUid());
+                                                    Firebase token = mfire.child("token");
+                                                    token.setValue((String)FirebaseInstanceId.getInstance().getInstanceId().getResult().getToken());*/
                                                     //Toast.makeText(HomeActivity.this, "Email verification sent, Please Verify to SignIn", Toast.LENGTH_SHORT).show();
                                                 }
                                             }

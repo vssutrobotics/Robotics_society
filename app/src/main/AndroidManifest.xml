@@ -88,6 +88,10 @@
             android:name=".techfest"
             android:parentActivityName=".awards" />
 
+        <activity
+            android:name=".prashikshan.prakish_check"
+            android:parentActivityName=".Home_Page" />
+
 
         <service android:name=".Notify.MessagingService">
             <intent-filter>

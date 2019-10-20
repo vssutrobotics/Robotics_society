@@ -27,6 +27,7 @@ import com.firebase.client.Firebase;
 import com.gaurav.robotics_society.Adapters.Achive;
 import com.gaurav.robotics_society.Models.Achivements_Model;
 import com.gaurav.robotics_society.app_update_checker.UpdateHelper;
+import com.gaurav.robotics_society.prashikshan.prakish_check;
 import com.gaurav.robotics_society.user.profile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -135,6 +136,11 @@ public class Home_Page extends AppCompatActivity implements UpdateHelper.onUpdat
                                 //Toast.makeText(Home_Page.this, "Awards", Toast.LENGTH_SHORT).show();
                                 Intent awards = new Intent(getBaseContext(), awards.class);
                                 startActivity(awards);
+                                break;
+
+                            case R.id.prakish:
+                                Intent prakish = new Intent(getBaseContext(), prakish_check.class);
+                                startActivity(prakish);
                                 break;
 
 
