@@ -58,7 +58,7 @@ public class prakish_check extends AppCompatActivity {
             edited = s.substring(1, 3);
         } else edited = null;
         //text.setText(edited);
-        String eligible = "18";
+        String eligible = "19";
 
         if (edited.equalsIgnoreCase(eligible) && (edited != null)) {
             setContentView(R.layout.eligible_prakish);

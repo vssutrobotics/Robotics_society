@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -50,6 +51,7 @@ public class forget extends AppCompatActivity {
                     View focusView = email_text;
                     focusView.requestFocus();
                 } else {
+                    email_text.onEditorAction(EditorInfo.IME_ACTION_DONE);
                     check(email);
                 }
             }
